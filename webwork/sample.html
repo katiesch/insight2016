@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+        <meta charset="utf-8">
+        <title>Sample Web</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+
+        <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+        <script type="text/javascript" src="us-states.js"></script>
+<script type="text/javascript" src="../shapefiles/sandiego_city_blockgroups.js"></script>
+
+<style>
+
+
+
+#mapid { height: 600px;}
+
+</style>
+</head>
+
+<body>
+<h1>Sample Web Page</h1>
+
+
+<p>lorem ipsum.</p>
+
+    
+</br>
+</br>
+
+ <div id="mapid"></div>
+
+
+<script>
+
+
+		var mymap = L.map('mapid').setView([32.7157, -117.1611], 11);
+
+		L.tileLayer('https://api.mapbox.com/styles/v1/katiesch/cithpugkf002c2jplgp9r4phm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2F0aWVzY2giLCJhIjoiY2l0aHBjaXZ1MDJmNDJzbnZzdTNvNHNyNCJ9.aW1smbPjspISZmPnvMTFTw', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			id: 'katiesch.Light',
+                        accessToken: 'pk.eyJ1Ijoia2F0aWVzY2giLCJhIjoiY2l0aHBjaXZ1MDJmNDJzbnZzdTNvNHNyNCJ9.aW1smbPjspISZmPnvMTFTw'
+		}).addTo(mymap);
+
+                L.geoJson(bgData).addTo(mymap);
+	</script>
+
+ </body>
+ </html>
