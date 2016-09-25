@@ -93,14 +93,17 @@ info.onAdd = function (mymap) {
 info.update = function (props) {
     this._div.innerHTML = (props ?
         '<b>Tract ' + props.TRACTCE + '</b><br />' + '<b>' + props.NAMELSAD + '</b><br />'
+        + 'Median Income: $' + props.MEDIAN_HOU + '<br />'
+        + 'Land Area: ' + props.ALAND + '<br />'
+
         : 'Hover over a blockgroup');
 };
 
 info.addTo(mymap);
 
 // set the color scales by hand 
-var getColor_MEDIAN_HOU = chroma.scale('RdYlBu').domain([0, 100000]);
-var getColor_ALAND = chroma.scale('RdYlBu').domain([10000, 500000]);
+var getColor_MEDIAN_HOU = chroma.scale('RdYlBu').domain([45055, 89658]);
+var getColor_ALAND = chroma.scale('RdYlBu').domain([229819, 749794]);
 
 var myVar = document.getElementById('field-select').value;
  
@@ -214,6 +217,7 @@ function switcher(value) {
     }
 }
 
+/*
 console.log(bgData);
 
 var legend = L.control({position: 'bottomright'});
@@ -221,13 +225,13 @@ var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (mymap) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 10000, 20000, 50000, 100000, 200000, 500000, 1000000],
+        grades = [0, 10000, 20000, 50000, 100000, 200000, 500000, 7500000],
         labels = [];
 
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
-            '<i style="background:' + getColor_MEDIAN_HOU(grades[i] + 1) + '"></i> ' +
+            '<i style="background:' + getColor_ALAND(grades[i] + 1) + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
     }
 
@@ -235,7 +239,7 @@ legend.onAdd = function (mymap) {
 };
 
 legend.addTo(mymap);
-
+*/
 
 $('#field-select').on('change', function() {
     switcher(this.value);
