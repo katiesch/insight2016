@@ -11,7 +11,10 @@
         <script type="text/javascript" src="us-states.js"></script>
         <script type="text/javascript" src="../shapefiles/sandiego_city_blockgroups_modeladded.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.2.1/chroma.min.js"></script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.0.0/leaflet.ajax.min.js"></script>
+        <script type="text/javascript" src="choropleth.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <style>
 
 #mapid { height: 600px;}
@@ -50,9 +53,10 @@
 <p>lorem ipsum.</p>
 
 <div class="options"><select id="field-select">
-  <option value="MEDIAN_HOU" selected>Median Household Income</option> 
+  <option value="MEDIAN_HOU">Median Household Income</option> 
   <option value="ALAND">Land Area</option>
-  <option value="value3">Value 3</option>
+  <option value="GRAFF_PER">Graffiti Percentage</option>
+  <option value="TOTAL_POP" selected>Total Population</option>
 </select>
 </div>
 
@@ -60,10 +64,8 @@
 </br>
 </br>
 
- <div id="mapid"></div>
+<div id="mapid"></div>
  
-
-
 <script>
 
 
@@ -89,25 +91,18 @@ info.onAdd = function (mymap) {
 
 // method that we will use to update the control based on feature properties passed
 info.update = function (props) {
-    this._div.innerHTML = '<h4>Land Area</h4>' +  (props ?
-        '<b>Tract ' + props.TRACTCE + '</b><br />' + '<b>' + props.NAMELSAD + '</b><br />' + props.ALAND + 'm<sup>2</sup>'
+    this._div.innerHTML = (props ?
+        '<b>Tract ' + props.TRACTCE + '</b><br />' + '<b>' + props.NAMELSAD + '</b><br />'
         : 'Hover over a blockgroup');
 };
 
 info.addTo(mymap);
- 
-var getColor = chroma.scale(['#FFEDA0', '#800026']).domain([Math.min(0,5), 100000]);
- 
-function style(feature) {
-    return {
-        fillColor: getColor(feature.properties.MEDIAN_HOU),
-        weight: 0.5,
-        opacity: 1,
-        color: 'black',
-        dashArray: '0',
-        fillOpacity: 0.4
-    };
-}
+
+// set the color scales by hand 
+var getColor = chroma.scale('RdYlBu').domain([Math.min(0,5), 100000]);
+var getColor_ALAND = chroma.scale('RdYlBu').domain([10000, 500000]);
+
+var myVar = document.getElementById('field-select').value;
  
 function highlightFeature(e) {
 	var layer = e.target;
@@ -129,10 +124,25 @@ function highlightFeature(e) {
  
 var geojson;
  
-                geoJson = L.geoJson(bgData, {style:style}).addTo(mymap);
+<!--geoJson = L.geoJson(bgData, {style:stylin}).addTo(mymap);-->
                 <!--geoJson = L.geoJson(statesData, {style:style}).addTo(mymap);-->
 
- function resetHighlight(e) {
+/*L.choropleth(bgData, {
+    valueProperty: myVar, // which property in the features to use
+    brewer: 'RdYlBu', // chroma.js scale - include as many as you like
+    steps: 11, // number of breaks or steps in range
+    mode: 'q', // q for quantile, e for equidistant, k for k-means
+    style: {
+        color: '#fff', // border color
+        weight: 2,
+        fillOpacity: 0.8
+    },
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup(feature.properties.value)
+    }
+}).addTo(mymap);*/
+
+function resetHighlight(e) {
     geojson.resetStyle(e.target);
     info.update(); 
 }
@@ -148,11 +158,62 @@ function zoomToFeature(e) {
     });
 }
 
+function stylin(feature) {
+    return {
+        fillColor: getColor(feature.properties.MEDIAN_HOU),
+        weight: 0.5,
+        opacity: 1,
+        color: 'black',
+        dashArray: '0',
+        fillOpacity: 0.4
+    };
+}
+
+// Initialize map colors 
 geojson = L.geoJson(bgData, {
-    style: style,
-    onEachFeature: onEachFeature
+          style: function(feature) {
+              return {
+                  fillColor: getColor(feature.properties.MEDIAN_HOU),
+                  weight: 0.5,
+                  opacity: 1,
+                  color: 'black',
+                  dashArray: '0',
+                  fillOpacity: 0.4
+              }
+          },
+          onEachFeature: onEachFeature
 }).addTo(mymap);
 
+function switcher(value) {
+    geojson.clearLayers();
+    if (value == 'ALAND') {
+        geojson = L.geoJson(bgData, {
+            style: function(feature) { return {
+                fillColor: getColor_ALAND(feature.properties.ALAND),
+                weight: 0.5,
+                opacity: 1,
+                color: 'black',
+                dashArray: '0',
+                fillOpacity: 0.4
+            }},
+            onEachFeature: onEachFeature
+        }).addTo(mymap);
+    } else if (value == 'MEDIAN_HOU') {
+        geojson = L.geoJson(bgData, {
+            style: function(feature) { return {
+                fillColor: getColor(feature.properties.MEDIAN_HOU),
+                weight: 0.5,
+                opacity: 1,
+                color: 'black',
+                dashArray: '0',
+                fillOpacity: 0.4
+            }},
+            onEachFeature: onEachFeature
+        }).addTo(mymap);
+    }
+}
+
+console.log(bgData);
 
 var legend = L.control({position: 'bottomright'});
 
@@ -174,6 +235,10 @@ legend.onAdd = function (mymap) {
 
 legend.addTo(mymap);
 
+
+$('#field-select').on('change', function() {
+    switcher(this.value);
+});
 	</script>
 
  </body>
