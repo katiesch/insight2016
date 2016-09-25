@@ -99,7 +99,7 @@ info.update = function (props) {
 info.addTo(mymap);
 
 // set the color scales by hand 
-var getColor = chroma.scale('RdYlBu').domain([Math.min(0,5), 100000]);
+var getColor_MEDIAN_HOU = chroma.scale('RdYlBu').domain([0, 100000]);
 var getColor_ALAND = chroma.scale('RdYlBu').domain([10000, 500000]);
 
 var myVar = document.getElementById('field-select').value;
@@ -160,12 +160,12 @@ function zoomToFeature(e) {
 
 function stylin(feature) {
     return {
-        fillColor: getColor(feature.properties.MEDIAN_HOU),
+        fillColor: getColor_MEDIAN_HOU(feature.properties.MEDIAN_HOU),
         weight: 0.5,
         opacity: 1,
         color: 'black',
         dashArray: '0',
-        fillOpacity: 0.4
+        fillOpacity: 0.2
     };
 }
 
@@ -173,17 +173,18 @@ function stylin(feature) {
 geojson = L.geoJson(bgData, {
           style: function(feature) {
               return {
-                  fillColor: getColor(feature.properties.MEDIAN_HOU),
+                  fillColor: getColor_MEDIAN_HOU(feature.properties.MEDIAN_HOU),
                   weight: 0.5,
                   opacity: 1,
                   color: 'black',
                   dashArray: '0',
-                  fillOpacity: 0.4
+                  fillOpacity: 0.2
               }
           },
           onEachFeature: onEachFeature
 }).addTo(mymap);
 
+// Switches between different drop down menu options
 function switcher(value) {
     geojson.clearLayers();
     if (value == 'ALAND') {
@@ -201,7 +202,7 @@ function switcher(value) {
     } else if (value == 'MEDIAN_HOU') {
         geojson = L.geoJson(bgData, {
             style: function(feature) { return {
-                fillColor: getColor(feature.properties.MEDIAN_HOU),
+                fillColor: getColor_MEDIAN_HOU(feature.properties.MEDIAN_HOU),
                 weight: 0.5,
                 opacity: 1,
                 color: 'black',
@@ -226,7 +227,7 @@ legend.onAdd = function (mymap) {
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
-            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            '<i style="background:' + getColor_MEDIAN_HOU(grades[i] + 1) + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
     }
 
