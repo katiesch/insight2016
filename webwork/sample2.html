@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+        <meta charset="utf-8">
+        <title>Sample Web</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+
+        <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+        <script type="text/javascript" src="us-states.js"></script>
+        <script type="text/javascript" src="../shapefiles/sandiego_city_blockgroups_modeladded.js"></script>
+        <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.2.1/chroma.min.js"></script>
+        <script type="text/javascript" src="choropleth.js"></script>
+
+<style>
+
+
+
+#mapid { height: 600px;}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+</style>
+</head>
+
+<body>
+<h1>Sample Web Page</h1>
+
+
+<p>lorem ipsum.</p>
+
+    
+</br>
+</br>
+
+ <div id="mapid"></div>
+
+
+<script>
+
+
+var mymap = L.map('mapid').setView([32.7157, -117.1611], 10);
+
+L.tileLayer('https://api.mapbox.com/styles/v1/katiesch/cithpugkf002c2jplgp9r4phm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2F0aWVzY2giLCJhIjoiY2l0aHBjaXZ1MDJmNDJzbnZzdTNvNHNyNCJ9.aW1smbPjspISZmPnvMTFTw', {
+        maxZoom: 18,
+	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+	'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+	'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+	id: 'katiesch.Light',
+        accessToken: 'pk.eyJ1Ijoia2F0aWVzY2giLCJhIjoiY2l0aHBjaXZ1MDJmNDJzbnZzdTNvNHNyNCJ9.aW1smbPjspISZmPnvMTFTw'
+	}).addTo(mymap);
+
+// control that shows state info on hover
+var info = L.control();
+
+info.onAdd = function (mymap) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+};
+
+// method that we will use to update the control based on feature properties passed
+info.update = function (props) {
+    this._div.innerHTML = '<h4>Land Area</h4>' +  (props ?
+        '<b>Tract ' + props.TRACTCE + '</b><br />' + '<b>' + props.NAMELSAD + '</b><br />' + props.ALAND + 'm<sup>2</sup>'
+        : 'Hover over a blockgroup');
+};
+
+info.addTo(mymap);
+
+var getColor = chroma.scale(['#FFEDA0', '#800026']).domain([Math.min(0,5), 100000]);
+ 
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.MEDIAN_HOU),
+        weight: 0.5,
+        opacity: 1,
+        color: 'black',
+        dashArray: '0',
+        fillOpacity: 0.4
+    };
+}
+function highlightFeature(e) {
+	var layer = e.target;
+
+	layer.setStyle({
+			weight: 1,
+			color: 'white',
+			dashArray: '',
+			fillOpacity: 0.7
+			});
+
+	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+		layer.bringToFront();
+	}
+
+	info.update(layer.feature.properties);
+}
+
+ 
+var geojson;
+ 
+                geoJson = L.geoJson(bgData, {style:style}).addTo(mymap);
+                <!--geoJson = L.geoJson(statesData, {style:style}).addTo(mymap);-->
+
+// Add GeoJSON
+$.getJSON('../sandiego_city_blockgroups.json', function (geojson) {
+  L.choropleth(geoJson, {
+    valueProperty: 'MEDIAN_HOU',
+    scale: ['white', 'red'],
+    steps: 5,
+    mode: 'q',
+    style: {
+      color: '#fff',
+      weight: 2,
+      fillOpacity: 0.8
+    },
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup('District ' + feature.properties.dist_num + '<br>' + feature.properties.incidents.toLocaleString() + ' incidents')
+    }
+  }).addTo(map)
+})
+
+
+
+ function resetHighlight(e) {
+    geojson.resetStyle(e.target);
+    info.update(); 
+}
+function zoomToFeature(e) {
+    mymap.fitBounds(e.target.getBounds());
+}
+
+ function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click: zoomToFeature
+    });
+}
+
+geojson = L.geoJson(bgData, {
+    style: style,
+    onEachFeature: onEachFeature
+}).addTo(mymap);
+
+
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (mymap) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 10000, 20000, 50000, 100000, 200000, 500000, 1000000],
+        labels = [];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+
+    return div;
+};
+
+legend.addTo(mymap);
+
+	</script>
+
+ </body>
+ </html>

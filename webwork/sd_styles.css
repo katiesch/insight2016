@@ -1,0 +1,373 @@
+@charset "UTF-8";
+#container {
+	width: 968px;
+    background: #FFF;
+    margin: 0 auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow: hidden;
+}
+
+/* CSS Document */
+
+/*Header background image and size*/
+#header {
+	color: #FFF;
+	background-color: #000;
+	/*height: 125px;*/
+	height: 280px;
+	position: relative;
+	width: 100%;
+	/*background-image: url(monumentvalley_pacholka_1387c.jpg);*/
+	background-image: url(stromlo3.png);
+	background-size: 100% 100%
+}
+/*Header small text specifications*/
+#header p {
+	font-family: "Courier New", "Courier", monospace;
+	font-size: 30px;
+	margin-bottom: 0px;
+	padding-top: 20px;
+	padding-left: 20px;
+	/*margin-left: 300px;*/
+	color: #000;
+	/*color: #FFF;*/
+}
+/*Navigation bar size, color*/
+#nav {
+	width: 100%;
+	float: left;
+	padding: 0;
+	margin-top: 0px;
+	margin-right: 0;
+	margin-bottom: 0em;
+	margin-left: 10px;
+	/*background-color: rgba(242, 242, 242,0.3);*/
+	background-color: rgb(0,0,0,0.1);
+}
+/*Navigation bar tab text specifications*/
+#nav ul {
+	font-family: "Courier New", "Courier", monospace;
+	list-style: none;
+	width: 968px;
+	margin: 0 auto;
+	padding: 0;
+	text-align: center;
+}
+#nav p {
+	font-family: "Courier New", "Courier", monospace;
+	list-style: none;
+	width: 968px;
+	margin: 0 auto;
+	padding: 0;
+        margin-left: 10px;
+	text-align: left;
+        color:#FFF
+}
+/*Navigation bar text alignment*/
+#nav li {
+	float: left;
+	font-family: "Courier New", "Courier", monospace;
+        color: #FFF;
+}
+/*Navigation bar display specifications*/
+#nav li a {
+	display: block;
+	padding: 8px 15px;
+	text-decoration: none;
+	font-weight: bolder;
+	color: #FFF;
+	/*border-right: 1px solid #ccc;*/
+	font-family: "Courier New", "Courier", monospace;
+	font-size: 12px;
+}
+/*Navigation bar color change when mouse over*/
+#nav li a:hover {
+	/*background-color: #f2f2f2;*/
+	background-color: #fff;
+        color: rgb(252,35,12);
+}
+/*Navigation bar subcategories display specifications*/
+#nav li ul {
+	display: none;
+	width: 10em;
+	background-color: #CCC;
+}
+/*Navigation bar subcategories visible on mouseover*/
+#nav li:hover ul {
+	display: block;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+        background-color: rgba(252,35,12,1.0);
+        }
+/*??*/
+#nav li:hover li {
+	float: none; 
+}
+/*Navigation bar subcategories change color during mouseover ??*/
+#nav li:hover li a {
+	background-color: #FFF;
+	border-bottom: 1px solid #fff;
+	color: #000; 
+}
+/*??*/
+#nav li li a:hover {
+	background-color: #FFF;
+	color: #000;
+}
+/*??*/
+#nav ul li .current {
+	color: #000;
+	font-variant: normal;
+	text-transform: uppercase;
+	background-color: rgba(255,255,255,1.0) ;
+}
+
+/*Footer size, color specifications*/
+#footer {
+	color: #FFF;
+	background-color: #000;
+	height: 50px;
+	width: 100%;
+	clear: both;
+ 	position: relative;
+ 	z-index: 10;
+ 	height: 3em;
+ 	margin-top: -3em;
+}
+/*Footer text details*/
+#footer p {
+	font-family: "Courier New", "Courier", monospace;
+	font-size: 10px;
+	font-variant: small-caps;
+	margin-bottom: 0px;
+	padding-top: 20px;
+	padding-left: 20px;
+	/*margin-left: 300px;*/
+	text-align: center;
+	color: #FFF;
+}
+
+/*Different text options*/
+h1 {
+	font-family: 'Cabin', sans-serif;
+	font-size: 85px;
+	margin: 0;
+	float: left;
+	margin-left: 10px;
+}
+h2 {
+	font-size: 22px;
+	text-transform: uppercase;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+h3 {
+	font-size: 18px;
+	/*padding-left: 10px;*/
+}
+h4 {
+	font-size: 16px;
+	color: #000;
+	font-style: italic;
+}
+p {
+	font-size: 14px;
+	color: #000;
+}
+
+pcaption {
+	font-size: 12px;
+	color: #000; 
+}
+
+halert { 
+	color:#F0F;
+}
+
+placeholder {
+	font-family: 'Cabin', sans-serif;
+	margin-left: 10px;
+	color:#FFF;
+	font-size:12px;
+	width:100%;
+}
+
+#mainbody ul {
+	font-family: 'Cabin', sans-serif;
+	width: 968px;
+	margin-left: 15px;
+	padding: 0;
+	text-align: left;
+        font-size: 14px;
+}
+
+#mainbody li {
+	font-family: 'Cabin', sans-serif;
+	width: 968px;
+	margin-left: 30px;
+	padding: 0;
+	text-align: left;
+        font-size: 14px;
+}
+
+/*Details about the main body of the page and its structure*/
+body {
+	font-family: 'Cabin', sans-serif;
+	color: #3B3B3B;
+}
+
+/*Column options. These are for a two column layout, with 
+the right column larger than the left slightly (e.g., home page) */
+#body_background {
+	background-color:#000;
+	width:100%;
+	
+}
+#mainbody {
+        background-color:#FFF;
+	/*float: none;*/
+	padding-top: 10px;
+	margin-left: 50px;
+	margin-right: 100px;
+	margin-top: 25px;
+}
+#mainbody_text {
+	background-color:#FFF;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+
+/*Formatting for including figures */
+table.figure {
+	font-family: 'Cabin', sans-serif;
+	padding: 0;
+	margin: 1em;
+	background-color: #FFF;
+	margin-left: auto; 
+        margin-right: auto;
+	/*float: right;*/
+}
+
+table.figure td {
+    color: black;
+    padding: 0;
+    margin: 0 auto 0 auto;
+    text-align: center;
+    background-color: #CCC;
+}
+
+table.figure a {
+    text-decoration: none;
+}
+
+table.figure img {
+	display: block;
+	border: 0;
+	padding: 0;
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+	background-color: #CCC;
+	
+}
+
+table.common {
+	float: right;
+	text-align: center;
+	border-collapse: collapse;
+	font-family: 'Cabin', sans-serif;
+	padding: 0;
+	padding: 0;
+	background-color: #CCC;
+	margin-top: 0px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+}
+
+table.common th {
+    border: 1px solid black;
+    color: black;
+    font-weight: bold;
+	padding:4px;
+	font-size:14px;
+	background-color:#FFF;
+}
+
+table.common td {
+    border: 1px solid black;
+    color: black;
+    font-weight: normal;
+	padding:4px;
+	font-size:12px;
+	background-color:#FFF;
+}
+
+table.common caption {
+	color: black;
+	font-weight: normal;
+	font-family: 'Cabin', sans-serif;
+	font-size: 12px;
+	background-color: #CCC;
+	vertical-align: bottom;
+	caption-side:bottom;
+}
+
+table.publications {
+	float: right;
+	text-align: left;
+	border-collapse: collapse;
+	font-family: 'Cabin', sans-serif;
+	padding: 0;
+	background-color: #CCC;
+	/*margin-top: 10px;
+	margin-right: 50px;
+	margin-bottom: 10px;
+	margin-left: 50px;
+	margin: 20px auto 20px auto;*/
+}
+
+table.publications th {
+    /*border: 1px solid black;*/
+    color: black;
+    font-weight: bold;
+    padding:4px;
+    font-size:12px;
+    background-color:#FFF;
+}
+
+table.publications td {
+    /*border: 1px solid black;*/
+    color: black;
+    font-weight: normal;
+	padding:4px;
+	font-size:12px;
+	background-color:#FFF;
+}
+
+table.publications caption {
+	color: black;
+	font-weight: normal;
+	font-family: 'Cabin', sans-serif;
+	font-size: 12px;
+	background-color: #CCC;
+	vertical-align: bottom;
+	caption-side:bottom;
+}
+
+
+#header2 {
+	float: right;
+	width: 100%;
+}
+#header2 p {
+	font-family: 'Cabin', sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	font-variant: small-caps;
+	color: #FFF;
+}
