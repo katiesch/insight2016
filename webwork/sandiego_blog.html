@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+       <meta charset="utf-8">
+       <title>Katharine J. Schlesinger - Data Visualisations - San Diego Graffiti </title>
+       <meta name="description" content="KJS - Data Visualisations - San Diego">
+       <meta name="keywords" content="sandiego,graffiti,insight2016">
+
+        <link href="/Users/kschles/Documents/Personal_Site/kjs_styles.css" rel="stylesheet" type="text/css">
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+        <link rel="stylesheet" href="http://humangeo.github.com/leaflet-dvf/dist/css/dvf.css" type="text/css" media="screen"/>
+
+        <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+        <script type="text/javascript" src="us-states.js"></script>
+        <script type="text/javascript" src="../shapefiles/sandiego_city_blockgroups_modeladded.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.2.1/chroma.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.0.0/leaflet.ajax.min.js"></script>
+        <script type="text/javascript" src="choropleth.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="linspace.js"></script>
+<style>
+
+#mapid { height: 650px;
+         width: 600px;
+       }
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+</style>
+</head>
+
+<body>
+<div id="container">
+  <div id="body_background">
+  <div id="header">
+    <h1>&nbsp</h1>
+    <table class="figure" style="float:right; margin-right:45px; margin-top:15px; margin-bottom:0px;">
+    <tr><td>
+    <img src="/Users/kschles/Documents/Personal_Site/headshot.jpg" width="110px;"></td></tr>
+    <tr><td>
+    </td></tr>
+    </table>
+
+    <div id="nav" align="center" style="margin-top:-25px;">
+      <p style="font-size:30px;">Katharine J. Schlesinger</p>
+      <p style="font-size:16px;">Fellow at Insight Data Science</p>
+      <p style="font-size:16px;">kschlesinger@gmail.com</p>
+      <br />
+      <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="cv_update.pdf">CV</a></li>
+      <li><a href="publications.html">Publications/Talks</a></li>
+      <li><a href="projects.html" class="current">Projects</a></li>
+      <li><a href="other_work.html">Other Work</a></li>
+      <li><a href="diversity.html">Equity Issues</a></li>
+      <li><a href="links.html">Useful Links</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="mainbody">
+     <div id="mainbody_text">
+
+       <h2>Predicting Graffiti Rates in San Diego</h2>
+       <i>K. Schlesinger,</i></br>
+       <i>partnering with the City of San Diego
+       Performance & Analytics Department</i></br>
+       <i>2016/09/25</i>
+       
+       
+<p>Whether large or small, graffiti has a significant effect on neighborhood quality. At the most basic level, graffiti is quite expensive to repair, costing San Diego upwards of $5 million dollars in a given year<sup><a href="#fn1" id="ref1">1</a></sup>. It also has a detrimental effect on property values and can potentially increase crime rates. According to the Broken Windows theory<sup><a href="#fn2" id="ref2">2</a></sup>>, small crimes, such as vandalism, leads to residents disengaging from their neighborhoods. Over time, this community withdrawal makes the area more susceptible to serious crimes.  </p>
+
+<p>San Diego is committed to decreasing graffiti. In June, they announced a new <a href="https://www.sandiego.gov/get-it-done">"Get It Done"</a> reporting system, where citizens can submit reports on a wide range of problems, like graffiti, tree hazards, and potholes. With this system, city government would like to learn more about the range of problems in different municipal areas and improve their response time.</p>
+
+<p>Unfortunately, not every area is using the 311 system equally. The
+       bulk of the ~20,000 reports stem from a small number of
+       areas. Below, we have divided the San Diego municipal area into
+       <a
+       href="https://en.wikipedia.org/wiki/Census_block_group">Census
+       block groups</a>. Overlaid is a heatmap, convolved with a Gaussian, showing the frequency of 311 reports in each area. </p>
+
+  <img src="../output_figures/report_distribution_smoothed.png" width="600px;"></td></tr>
+
+       
+<p>As you can see, most of the reports are clustered around the Balboa
+  park area downtown. There are 864 blockgroups in the San Diego
+  municipal area. 264 of these have filed less than 10 reports since
+  the "Get It Done" app has gone lived. These areas account for 16% of
+  the land area and 26% of the population of San Diego. Most
+  importantly, we don't know if we're not getting reports from these
+  areas because they don't have problems or they're simply just not
+  using 311. The city could be unaware of serious problems in these
+  areas, resulting in them underserving a large portion of their
+  citizens. </p>
+
+<p>Fortunately, we can use the information from blockgroups that <b><i>are</i></b> reporting to understand the needs of those that <b><i>aren't</i></b>. </p>
+
+<h3>Designing a Predictive Model: Feature Exploration</h3>
+  
+<div class="options"><select id="field-select">
+  <option value="MEDIAN_HOU" selected>Median Household Income</option> 
+  <option value="ALAND">Land Area</option>
+  <option value="GRAFFITI_P">Fraction of Reports Graffiti-Related</option>
+  <option value="PREDICTED_">Predicted Fraction of Reports Graffiti-Related</option>
+  <option value="TOTAL_POP">Total Population</option>
+  <option value="REP_PER_CA">311 Reports per Capita</option>
+  <option value="WHITE_PER">Caucasian Fraction of Population</option>
+  <option value="LATIN_PER">Hispanic/Latino Fraction of Population</option>
+  <option value="MEDIAN_AGE">Median Age</option>
+  <option value="LIMITED_EN">Fraction of Households with Limited English</option>
+  <option value="TREE_DENSI">Tree Density</option>
+  <option value="CRIME_PER_">Crime per Capita</option>
+  <option value="AP_COUNT">Number of Abandoned Properties</option>
+  <!--<option value=""></option>-->
+</select>
+</div>
+
+    
+</br>
+</br>
+
+<div id="mapid"></div>
+ 
+<!--<script type="text/javascript" src="mapping.js"></script>-->
+
+<p><a name="fn1">1</a>: <a href="http://www.sandag.org/uploads/publicationid/publicationid_1667_14466.pdf">Graffiti Tracker: An Evaluation of the San Diego County Multi-Discipline Graffiti Abatement program</a> </p>
+<p><a name="fn2">2</a>: <a href="https://en.wikipedia.org/wiki/Broken_windows_theory">Broken Windows Theory</a> </p>
+
+</body>
+</html>
