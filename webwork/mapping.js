@@ -25,7 +25,7 @@ info.update = function (props) {
     this._div.innerHTML = (props ?
         '<b>Tract ' + props.TRACTCE + '</b><br />' + '<b>' + props.NAMELSAD + '</b><br />'
 	+ 'Number of 311 Reports: ' + Math.round(props.COUNT) + '<br />'
-        + 'Graffiti Percent Reported: ' + Math.round(props.GRAFFITI_P) + '% <br />'
+        + 'Graffiti Percent Reported: ' + Math.round(props.GRAFFITI_R) + '% <br />'
         + 'Graffiti Percent Predicted: ' + Math.round(props.PREDICTED_) + '% <br />'
 
         : 'Hover over a blockgroup');
@@ -46,12 +46,12 @@ var getColor_TOTAL_POP = chroma.scale('YlGnBu').domain([980,2035]);
 var getColor_COUNT = chroma.scale('YlGnBu').domain([0,7]);
 var getColor_TREE_DENSI = chroma.scale('Greens').domain([700, 2800]);
 var getColor_REP_PER_CA = chroma.scale('YlGnBu').domain([5, 19]);
-var getColor_GRAFFITI_P = chroma.scale('YlGnBu').domain([0.0, 50.]);
-var getColor_GRAFFITI_R = chroma.scale('YlGnBu').domain([0.0,100.]); 
+var getColor_GRAFFITI_P = chroma.scale('YlGnBu').domain([0.0, 50.]); // graffiti per 1000 people
+var getColor_GRAFFITI_R = chroma.scale('YlGnBu').domain([0.0, 50.]); // graffiti percentage
 var getColor_SL_DENSITY = chroma.scale('YlOrRd').domain([150.,350.]);
 var getColor_COUNT = chroma.scale('YlGnBu').domain([0.0,50.]);
 var getColor_COMBINED_L = chroma.scale('YlGnBu').domain([7.,34.]);
-var getColor_POPULATION = chroma.scale('YlGnBu').domain([5100.,14200.]);
+var getColor_POPULATION = chroma.scale('YlGnBu').domain([5100.,10000.]);
 // var getColor_ = chroma.scale('RdYlBu').domain([]);
 
 
@@ -111,7 +111,7 @@ function zoomToFeature(e) {
 geojson = L.geoJson(bgData, {
           style: function(feature) {
               return {
-                  fillColor: getColor_MEDIAN_HOU(feature.properties.MEDIAN_HOU),
+                  fillColor: getColor_COUNT(feature.properties.COUNT),
                   weight: 0.5,
                   opacity: 1,
                   color: 'black',
@@ -190,7 +190,7 @@ function switcher(value) {
     } else if (value == 'PREDICTED_') {
         legend.onAdd = function (mymap) {
         var div = L.DomUtil.create('div', 'info legend'),
-        grades = linspace(10., 37,8),
+        grades = linspace(0., 50.,8),
         labels = [];
 
         // loop through our density intervals and generate a label with a colored square for each interval
@@ -457,7 +457,7 @@ function switcher(value) {
             }},
             onEachFeature: onEachFeature
         }).addTo(mymap);
-    } else if (value == 'GRAFFITI_P') {
+    } else if (value == 'GRAFFITI_R') {
         legend.onAdd = function (mymap) {
         var div = L.DomUtil.create('div', 'info legend'),
         grades = linspace(0.0, 50.,8),
@@ -466,7 +466,7 @@ function switcher(value) {
         // loop through our density intervals and generate a label with a colored square for each interval
         for (var i = 0; i < grades.length; i++) {
           div.innerHTML +=
-             '<i style="background:' + getColor_GRAFFITI_P(grades[i] + 1) + '"></i> ' +
+             '<i style="background:' + getColor_GRAFFITI_R(grades[i] + 1) + '"></i> ' +
 	Math.round(grades[i]) + ((grades[i + 1]) ? '&ndash;' + Math.round(grades[i + 1]) + '<br>' : '+');
         }
         return div;
@@ -476,7 +476,7 @@ function switcher(value) {
 
         geojson = L.geoJson(bgData, {
             style: function(feature) { return {
-                fillColor: getColor_GRAFFITI_P(feature.properties.GRAFFITI_P),
+                fillColor: getColor_GRAFFITI_R(feature.properties.GRAFFITI_R),
                 weight: 0.5,
                 opacity: 1,
                 color: 'black',
@@ -572,7 +572,7 @@ function switcher(value) {
      } else if (value == 'POPULATION') {
         legend.onAdd = function (mymap) {
         var div = L.DomUtil.create('div', 'info legend'),
-            grades = linspace(5100., 14200.,8),
+            grades = linspace(5100., 10000.,8),
         labels = [];
 
         // loop through our density intervals and generate a label with a colored square for each interval
@@ -608,13 +608,13 @@ var legend = L.control({position: 'bottomright'});
 
 legend.onAdd = function (mymap) {
      var div = L.DomUtil.create('div', 'info legend'),
-     grades = linspace(45000, 90000,8)
+    grades = linspace(0, 50,8)
      labels = [];
 
      // loop through our density intervals and generate a label with a colored square for each interval
      for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
-            '<i style="background:' + getColor_MEDIAN_HOU(grades[i] + 1) + '"></i> ' +
+            '<i style="background:' + getColor_COUNT(grades[i] + 1) + '"></i> ' +
              '$' + Math.round(grades[i]) + (Math.round(grades[i + 1]) ? '&ndash;' + '$' + Math.round(grades[i + 1]) + '<br>' : '+');
      }
      return div;
