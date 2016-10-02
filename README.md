@@ -1,6 +1,6 @@
 Consulting Project for the City of San Diego predicting Graffiti rates
 
-Blog post and interactive map available at http://www.katiesch.com/sandiego.html
+Blog post and interactive map available at http://katiesch.com/sandiego.html
 
 ### Data Processing 
 
