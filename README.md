@@ -1,5 +1,7 @@
 Consulting Project for the City of San Diego predicting Graffiti rates
 
+Blog post and interactive map available at katiesch.com/sandiego.html
+
 ### Data Processing 
 
 Programs below read and process various data sources. Pull geocoding information, etc. 
