@@ -43,7 +43,6 @@ var getColor_CRIME_PER_ = chroma.scale('YlGnBu').domain([5., 23.]);
 var getColor_MEDIAN_AGE = chroma.scale('YlGnBu').domain([30, 42]);
 var getColor_WHITE_PER = chroma.scale('YlGnBu').domain([22, 73]);
 var getColor_TOTAL_POP = chroma.scale('YlGnBu').domain([980,2035]);
-var getColor_COUNT = chroma.scale('YlGnBu').domain([0,7]);
 var getColor_TREE_DENSI = chroma.scale('Greens').domain([700, 2800]);
 var getColor_REP_PER_CA = chroma.scale('YlGnBu').domain([5, 19]);
 var getColor_GRAFFITI_P = chroma.scale('YlGnBu').domain([0.0, 50.]); // graffiti per 1000 people
@@ -64,7 +63,7 @@ function highlightFeature(e) {
 			weight: 1,
 			color: 'white',
 			dashArray: '',
-			fillOpacity: 0.7
+			fillOpacity: 0.3
 			});
 
 	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
@@ -116,7 +115,7 @@ geojson = L.geoJson(bgData, {
                   opacity: 1,
                   color: 'black',
                   dashArray: '0',
-                  fillOpacity: 0.2
+                  fillOpacity: 0.3
               }
           },
           onEachFeature: onEachFeature
@@ -453,7 +452,7 @@ function switcher(value) {
                 opacity: 1,
                 color: 'black',
                 dashArray: '0',
-                fillOpacity: 0.2
+                fillOpacity: 0.3
             }},
             onEachFeature: onEachFeature
         }).addTo(mymap);
@@ -481,7 +480,7 @@ function switcher(value) {
                 opacity: 1,
                 color: 'black',
                 dashArray: '0',
-                fillOpacity: 0.2
+                fillOpacity: 0.3
             }},
             onEachFeature: onEachFeature
         }).addTo(mymap);
@@ -509,7 +508,7 @@ function switcher(value) {
                 opacity: 1,
                 color: 'black',
                 dashArray: '0',
-                fillOpacity: 0.2
+                fillOpacity: 0.3
             }},
             onEachFeature: onEachFeature
         }).addTo(mymap);
@@ -537,7 +536,7 @@ function switcher(value) {
                 opacity: 1,
                 color: 'black',
                 dashArray: '0',
-                fillOpacity: 0.2
+                fillOpacity: 0.3
             }},
             onEachFeature: onEachFeature
         }).addTo(mymap);
@@ -565,7 +564,7 @@ function switcher(value) {
                 opacity: 1,
                 color: 'black',
                 dashArray: '0',
-                fillOpacity: 0.2
+                fillOpacity: 0.3
             }},
             onEachFeature: onEachFeature
         }).addTo(mymap);
@@ -593,7 +592,7 @@ function switcher(value) {
                 opacity: 1,
                 color: 'black',
                 dashArray: '0',
-                fillOpacity: 0.2
+                fillOpacity: 0.3
             }},
             onEachFeature: onEachFeature
         }).addTo(mymap);
@@ -614,8 +613,8 @@ legend.onAdd = function (mymap) {
      // loop through our density intervals and generate a label with a colored square for each interval
      for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
-            '<i style="background:' + getColor_COUNT(grades[i] + 1) + '"></i> ' +
-             '$' + Math.round(grades[i]) + (Math.round(grades[i + 1]) ? '&ndash;' + '$' + Math.round(grades[i + 1]) + '<br>' : '+');
+            '<i style="background:' + getColor_COUNT(grades[i] + 1) + '"></i> '
+             + Math.round(grades[i]) + (Math.round(grades[i + 1]) ? '&ndash;' + Math.round(grades[i + 1]) + '<br>' : '+');
      }
      return div;
 };

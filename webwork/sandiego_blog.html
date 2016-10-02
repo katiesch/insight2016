@@ -60,8 +60,6 @@
     <table class="figure" style="float:right; margin-right:45px; margin-top:15px; margin-bottom:0px;">
     <tr><td>
     <img src="headshot.jpg" width="110px;"></td></tr>
-    <tr><td>
-    </td></tr>
     </table>
 
     <div id="nav" align="center" style="margin-top:-25px;">
@@ -71,12 +69,14 @@
       <br />
       <ul>
       <li><a href="index.html">Home</a></li>
-      <li><a href="cv_update.pdf">CV</a></li>
+      <li><a href="KatharineSchlesinger.pdf">Resume</a></li>
       <li><a href="publications.html">Publications/Talks</a></li>
-      <li><a href="projects.html" class="current">Projects</a></li>
-      <li><a href="other_work.html">Other Work</a></li>
-      <li><a href="diversity.html">Equity Issues</a></li>
-      <li><a href="links.html">Useful Links</a></li>
+      <li><a href="projects.html">Astronomy</a></li>
+      <li><a href="other_work.html" class="current">Data Science</a></li>
+      <li><a href="diversity.html">STEM Equity</a></li>
+      <!--<li><a href="links.html">Useful Links</a></li>-->
+      <li><a href="https://www.linkedin.com/in/katiesch">LinkedIn</a></li>
+      <li><a href="https://github.com/katiesch">GitHub</a></li>
       </ul>
     </div>
   </div>
@@ -84,61 +84,84 @@
   <div id="mainbody">
      <div id="mainbody_text">
 
-       <h2>Predicting Graffiti Rates in San Diego</h2>
+       <h2>CleanStreet: Optimizing Graffiti Removal in San Diego</h2>
        <i>In partnership with the <a href="https://www.sandiego.gov/pad">City of San Diego
        Performance & Analytics Department</a></i></br>
-       <i>2016/09/27</i>
+       <i>2016/09/29</i>
 
        </br></br>
        <a href="#map_dropdown">Jump straight to the map</a>
        </br>
        
-<p>Whether large or small, graffiti has a significant effect on neighborhood quality. At the most basic level, graffiti is quite expensive to repair, costing San Diego upwards of $5 million dollars in a given year<sup><a href="#fn1" id="ref1">1</a></sup>. It also has a detrimental effect on property values and can potentially increase crime rates. According to the Broken Windows theory<sup><a href="#fn2" id="ref2">2</a></sup>, small crimes, such as vandalism, leads to residents disengaging from their neighborhoods. Over time, this community withdrawal makes the area more susceptible to serious crimes.  </p>
+       <p>Whether large or small, graffiti has a significant effect on
+       neighborhood quality. At the most basic level, graffiti is
+       expensive to repair, costing San Diego upwards of $5 million
+       dollars per year<sup><a href="#fn1"
+       id="ref1">1</a></sup>. Graffiti also has a detrimental effect
+       on property values and can potentially increase crime
+       rates. Small persistent crimes, such as vandalism, leads
+       residents to disengage from their neighborhoods, eventually
+       making it more susceptible to significant criminal activity<sup><a
+       href="#fn2" id="ref2">2</a></sup>. If you apply that theory here, San Diego's
+       persistent graffiti issue could eventually open it up to much
+       larger and more pernicious problems.  </p>
 
-<p>San Diego is committed to decreasing graffiti. In June, they
+       <p>Given the potential long term issues graffiti could cause the city,
+       San Diego is committed to decreasing it. In June, the city
        announced a new <a
-       href="https://www.sandiego.gov/get-it-done">"Get It Done"</a>
-       reporting system, where citizens can submit reports on a wide
-       range of problems, like graffiti, tree hazards, and
-       potholes. With this system, city government would like to learn
-       more about the range of problems in different municipal areas
-       and improve their response time. Response time is particularly
-       important for graffiti, as quick clean ups discourage tagging
-       activity. People won't go through the effort to tag a wall when
-       it will just be cleaned up in a day or two.</p>
+       href="https://www.sandiego.gov/get-it-done">Get It Done</a>
+       system, through which residents can submit reports on a wide
+       range of problems, like graffiti, downed trees, and
+       potholes. This system is designed to help government learn more
+       about the range of problems in different municipal areas and
+       improve their response time. Response time is particularly
+       important for graffiti, because rapid clean ups discourage
+       further tagging activity. Research shows that people won't
+       go through the effort to tag a wall when
+       they know that their graffiti will be cleaned up in a manner of
+       days<sup><a
+       href="#fn3" id="ref3">3</a></sup>.</p>
 
-<p>Unfortunately, not every area is using the 311 system equally. The
-       bulk of the ~20,000 reports stem from a limited number of neighborhoods. Below, we have divided the San Diego municipal area into
+<p>Unfortunately, not every area is using the Get It Done system equally. The
+       bulk of the ~21,000 reports stem from a limited number of neighborhoods. Below, we have divided the San Diego municipal area into
        <a
        href="https://en.wikipedia.org/wiki/Census_block_group">Census
-       block groups</a>. Overlaid is a heatmap, convolved with a Gaussian, showing the frequency of 311 reports in each area. </p>
+       block groups</a>, the smallest geographical unit the United
+       States Census Bureau uses to publish its sample data, with
+       populations ranging from 600 to 3,000 people. Overlaid is
+       a smoothed heatmap, showing the frequency
+       of Get It Done reports in each area. </p>
 
-  <td><tr><img src="sd_figures/report_distribution_smoothed.png"
-    width="600px;"></td></br><pcaption>The distribution of 311 requests
-    around San Diego</pcaption></tr>
-
+    <table class="figure">
+    <tr><td>
+    <img src="sd_figures/report_distribution_smoothed.png" width="600px;"></td></tr>
+    <tr><td>
+      <pcaption>The distribution of Get It Done reports
+    around San Diego</pcaption>
+    </td></tr>
+    </table>
        
-<p>As you can see, most of the reports are clustered around Balboa
-  Park downtown; 30% of San Diego's block groups have each filed less
-  than 10 reports since the "Get It Done" app has gone live. These areas account for 16% of
-  the land area and 26% of the population of San Diego. Critically,
-  the city doesn't know if these areas don't have 311 requests because
-  things are going well or they have problems and are not reporting
-  them. The city could be unaware of serious problems in these
-  block groups, resulting in them underserving a large portion of their
-  citizens. </p>
+<p>Most of the reports are clustered around Balboa
+  Park downtown; 30% of block groups have each filed less
+  than 10 reports since the Get It Done system went live. These areas account for 16% of
+  San Diego's land area and 26% of its population. Critically,
+  the city currently does not know whether the lack of Get It Done
+  reports in these areas is due to a lack of problems or
+  underreporting. If the city is unaware of serious problems in these
+  block groups, they could be underserving a large portion of San
+  Diego's residents. </p>
 
-<p>Fortunately, we can use the information from blockgroups that
+<p>Fortunately, we can use the information from block groups that
     <b><i>are</i></b> reporting to understand the needs of those that
     <b><i>aren't</i></b>. </p>
 
 <h3>Data Exploration</h3>
 
-<p>I want to search for any possible patterns in reported graffiti in
- San Diego. To do this, I mapped out information from a wide range of
+<p>I would like to identify any possible patterns in San Diego's
+ reported graffiti. To do this, I mapped out information from a wide range of
  data sources, including: 
 <ul>  
-<li> Demographics from the <a href="https://factfinder.census.gov/faces/nav/jsf/pages/programs.xhtml?program=acs">American Community Survey</a>. Among other information, I looked at: <ul>
+<li> Demographics from the U.S. Census Bureau's <a href="https://factfinder.census.gov/faces/nav/jsf/pages/programs.xhtml?program=acs">American Community Survey</a>. Among other information, I looked at: <ul>
     <li>Age</li>
     <li>Race and Ethnicity</li>
     <li>Household Income</li>
@@ -162,11 +185,11 @@
 
 
  <p  id="map_dropdown" >Below is an
- interactive viewer of each of the block groups in San Diego, color
+ interactive viewer of each of the San Diego block groups, color
  coded by the property selected in the dropdown menu.</p>
 
 </br>
-
+ 
 <p>Select the Information you'd Like to Display:</p>
 <div class="options"><select id="field-select">
   <option value="REP_PER_CA">311 Reports per 1000 people</option>
@@ -194,131 +217,155 @@
 </br>
 </br>
 
-<div id="mapid"></div>
- 
-<script type="text/javascript" src="sdjs/mapping.js"></script>
 
+    <div id="mapid" style="align: center"></div>
+    <script type="text/javascript" src="sdjs/mapping.js"></script>
 
 </br>
 </br>
+
+
+<h3>Designing a Predictive Model</h3>
 
 <p>
 As I explored the data, some interesting patterns emerged. For example:
 <ul>
-  <li>Both high and low income areas have low reporting rates</li>
-  <li>Graffiti reports cluster in location</li>
-  <li>There are more reports per person from areas with a larger Caucasian population</li>
+  <li>Both high and low income areas have low reporting rates.</li>
+  <li>Graffiti reports cluster in certain locations.</li>
+  <li>There are more reports per person from areas with a larger
+  Caucasian population.</li>
+  <li>Graffiti rates tend to be higher in lower-income areas with high
+  population density</li>
 </ul></p>
 
-<h3>Designing a Predictive Model</h3>
-
-<p>After looking at the various correlations between my graffiti rate and
-other neighborhood characteristics, I combined a series of features
+<p>I used these patterns to inform my feature engineering and
+selection, combining them 
 together in a <a
 href="http://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares">Linear
-Regression Model</a>. In its favor, this model is clearly
-interpretable, as you can examine the effect each individual feature
-has on the overall graffiti rate. This is particularly valuable in this context, as it can help San Diego better understand their graffiti problem. 
-However, this model can be severely affected by collinearity. Many of
-my features are related to one another, and I thus had to be very
-careful while selecting which parameters went into my model. </p>
+Regression Model</a>. This model allows you to examine the effect each individual feature
+has on the overall graffiti rate. This information can help San Diego
+better understand its graffiti problem. However, because this model
+can be severely affected by collinearity, I had to carefully select
+which parameters were included. </p>
 
-<p>To train my model, I extracted a sample of blockgroups with a range
-of graffiti rates. Each of these blockgroups also has a large number
-of reports (more than 22), such that I'm confident that the number of graffiti
-reports reflect local conditions. As there are many more blockgroups
+<p>To train my model, I extracted a sample of block groups with a range
+of graffiti rates. Each of these block groups also has many reports
+(more than 22), which increases my confidence that the reports
+accurately reflect the local conditions. As there are many more block groups
 with low graffiti reporting rates, I isolate regions where the
 graffiti reporting rate is high, more than 40%. I then extract an
-equal number of blockgroups where the reporting rate is low, such that
-I have a well-balanced training set. Without this balance, my model
-will be biased towards low-graffiti rates. </p>
+equal number of block groups where the graffiti-reporting rate is low
+to create a well-balanced training set. This prevents my model from
+being biased toward low graffiti rates. </p>
 
-<p>Using careful feature selection and engineering, I create a linear
-regression model based on this training set. The data set is quite
-sparse, making it difficult to validate my model. As a test, I apply my
-model to all remaining blockgroups with a statistically significant
+<p>Using careful feature selection and engineering, I used this
+training set as the basis for a linear
+regression model. Because the data set is sparse, it is difficult to
+validate my model. As a test, I apply my
+model to all remaining block groups with a statistically significant
 number of reports (>22). When I compare my predicted graffiti rates to
-the reported rates for blockgroups in my test set, I find that a <a
+the reported rates for block groups in my test set, I find that a <a
 href="https://en.wikipedia.org/wiki/Residual_sum_of_squares">residual
-sum of squares</a> of 0.05, suggesting that my model is quite a good
-fit to the data. When I examine the distribution of the difference
-between my predicted and reported graffiti rates, there is a standard
-deviation of 17%. Although this is a relatively large percentage, my
-model is clearly able to distinguish between high and low graffiti rates. </p>
+sum of squares</a> of 0.05, suggesting that my model is a good
+fit to the data. An examination of the distribution of the difference
+between my predicted and reported graffiti rates shows a 0.17 standard
+deviation, with graffiti rates ranging between 0 and 1. Although there
+is some variation, my model is clearly able to distinguish between high and low graffiti rates. </p>
 
 <h3>Recommendations for the City of San Diego</h3>
 
 <p>Using my machine-learning model, I can predict the graffiti rates
-for all the areas in San Diego that are not making use of the 311
-system. This information allows the San Diego government to both a)
-better market the "Get It Done" system to underreporting areas and b)
-anticipate the needs of each neighborhood to ensure a better response time. </p>
+for all the areas in San Diego that are not using the new Get It Done
+system. This information will allow the San Diego government to
+accomplish two important goals. First, it can use the data to better
+market the Get It Done system in areas that are underreporting
+graffiti. Second, it will allow the city to better anticipate each
+block group's needs to ensure a better response time, preventing
+additional graffiti and saving the city money. </p>
 
-  <tr><td><img src="sd_figures/side_by_side.png" width="785px;"></td>
-  <pcaption><i>Left:</i> A choropleth map of each block group in San
-  Diego, color-coded by the fraction of 311 reports that are
+
+    <table class="figure">
+    <tr><td><img src="sd_figures/side_by_side.png" width="750px;">
+    </td></tr>
+    <tr><td>
+       <pcaption><i>Left:</i> A choropleth map of each block group in San
+  Diego, color-coded by the fraction of Get It Done reports that are
   graffiti-related. The white regions are areas where we have less
   than 22 reports in total; for many of these we have no reports at
-  all. <i>Right:</i> The same map but here I have used my predictive
-  model to constrain the graffiti rate in each of individual
-  blockgroup. You can see that many of the areas where we have few
-  reports are expected to have high graffiti rates!</pcaption></tr>
+  all. <i>Right:</i> Here I have used my predictive
+  model to constrain the graffiti rate in the individual block groups
+    with minimal reporting. </pcaption>
+      </td></tr>
+    </table>
 
- <h4>Response Time</h4>
-<p>Improving response time is critical, as much of the graffiti in San Diego is tagging, where individuals are looking for publicity<sup><a href="#fn1" id="ref1">1</a></sup>. A quick clean up discourages tagging, as it limits the graffiti's exposure time.</p>
 
-<p>Currently, the mean response time is 30 days for all blockgroups in
-  San Diego, regardless of their graffiti reporting rate. By
-  identifying high graffiti areas, the City can focus their
+<h4>Response Time</h4>
+<p>Improving response time is critical, as much of the graffiti in San Diego is tagging, where individuals are looking for publicity<sup><a href="#fn1" id="ref1">1</a></sup>. A quick clean up discourages tagging, as it limits the graffitis' exposure time.</p>
+
+<p>Currently, the mean response time is 30 days for all San Diego block groups, regardless of their graffiti reporting rate. By
+  identifying high graffiti areas, the city can focus its
   maintenance efforts on the areas most in need. </p>
 
 <h4>Streetlights</h4>
-<p>City government has also considered adding additional street lights
-  to graffiti-ridden areas. The thought is that graffiti is focused in
-  darker areas because it is easier to commit a crime in the dark and
-  not get caught. I wanted to both test this theory and integrate
+<p>San Diego city government has also considered adding additional street lights
+  to graffiti-ridden areas. The city theorized that graffiti was
+    focused in darker areas, where it would be harder for someone to
+    be seen committing a crime. I wanted to both test this theory and integrate
   streetlight frequency into my predictive model. Using local infrastructure databases, I
-  determined the street light density (e.g., number of streetlights in a square mile) for each block group. <p>
+  determined the street light density (e.g., number of streetlights
+    per
+   square mile) for each block group. <p>
 
-<tr><td><img src="sd_figures/streetlights_map_smoothed.png"
-  width="600px;"></td></br>
-<pcaption>Distribution of Streetlights in San Diego</pcaption></tr>
+    <table class="figure">
+    <tr><td><img src="sd_figures/streetlights_side_by_side.png"
+  width="750px;">
+    </td></tr>
+    <tr><td>
+      <pcaption><i>Left:</i> A smoothed heatmap showing the
+    distribution of streetlights in San Diego. <i>Right:</i> As shown above, this figure uses my predictive model to fill in the
+    areas with minimal reported with their expected graffiti rate. </pcaption>
+      </td></tr>
+    </table>
+ 
 
-<p>Looking at the figure above, and working with the <a
-href="#map_dropdown">map</a>, you can see that there is not a strong correlation
-between streetlight density and graffiti rates. I suspect that other
+<p>The figure and  <a href="#map_dropdown">map</a> above show that
+there is not a strong correlation between streetlight density and graffiti rates. I suspect that other
 demographic factors complicate the analysis;
 for example, areas with higher streetlight density are more densely
 populated. </p>
 
 <p>In addition, if the majority of graffiti in San Diego is done for publicity,
 taggers will want to be close enough to a streetlight that their work
-is visible, but far enough that they don't get caught. Thus, looking
+is visible, but far enough away that they do not get caught. Accordingly, looking
 at the typical distance between a graffiti event and the nearest
 streetlight can provide a more nuanced picture. </p>
 
 <p>In both
   graffiti-rich and -poor areas, the median distance between a
-  graffiti event and a streetlight is around 100 feet. This seems
-  relatively far from the light. However, when I measure the distance
+  graffiti event and a streetlight is around 100 feet, which seems
+  like a far distance. However, when I measure the distance
   between random locations in a block group and the nearest
   streetlight, the value is much higher, around 190 feet. Although
   these points are randomly placed, rather than clustered along a
   street, it indicates that there are many darker locations where
-  people could be tagging but they aren't. This suggests that
+  people could be tagging but they are not, suggesting that
   streetlights alone are not a strong deterrent against graffiti.</p>
 
-<tr><td><img src="sd_figures/sl_mindist_gper25.png" width="350px;"></td></br>
-  <pcaption><i>Red:</i> Mean distance between a graffiti event and a
-  streetlight for blockgroups with high graffiti and reporting.
-  <i>Black:</i> Mean distance between random locations in each
-  blockgroup and the nearest streetlight for areas with high graffiti
-  and high reporting rates. </pcaption></tr>
+    <table class="figure" style="width: 360px">
+    <tr><td><img src="sd_figures/sl_mindist_gper25_legend.png" width="350px;">
+    </td></tr>
+    <tr><td>
+      <pcaption>Mean distance between a streetlight and a graffiti event
+    (red) or a random location (black) for block groups with high graffiti and reporting rates. 
+</pcaption>
+      </td></tr>
+    </table>
+
 
 <p>In theory, streetlight outages would be the ideal situation for a
-  tagger. You will be able to do your work in the dark but, once the
-  streetlight is repaired, it will be clearly visible. Residents can
-  report when a streetlight is out via the 311 system, and I looked
+  tagger. They can work in the dark but, once the
+  streetlight is repaired, their tag will be clearly visible. Residents can
+  report when a streetlight is out via the Get It Done system, and I looked
   for a correlation between outages and graffiti events. Currently,
   there is no strong correlation between streetlight outages and
   graffiti, but there are only around 1300 outage reports in total. As
@@ -329,21 +376,23 @@ streetlight can provide a more nuanced picture. </p>
 <h3>Final Thoughts</h3>
 
   <p>My predictive model of graffiti rates by blockgroup will allow
-  San Diego to focus their maintenance efforts on the areas that need
-  it most, improving response time and discouraging tagging. It can also provide
-  a useful metric for the city to see the effectiveness of their
-  anti-graffiti programs. Finally, it allows the government to see
+  San Diego to focus its maintenance efforts on the areas most in
+  need, improving response time and discouraging tagging. The model
+  also provides a useful metric for the city to see the effectiveness of their
+  anti-graffiti programs. Finally, it allows the San Diego government to identify
   neighborhoods where they need to better engage the community with
-  the "Get It Done" system. In the future, I can use
-  additional data from the 311 system to improve and refine the
-  model.</p>
+  the Get It Done system. In the future, I can use
+  additional data from the reporting system to improve and refine the
+  model, creating even more utility for the city.</p>
   
   </br>
   </br>
   
 <p><a name="fn1">1</a>: <a href="http://www.sandag.org/uploads/publicationid/publicationid_1667_14466.pdf">Graffiti Tracker: An Evaluation of the San Diego County Multi-Discipline Graffiti Abatement program</a> </p>
 <p><a name="fn2">2</a>: <a href="https://en.wikipedia.org/wiki/Broken_windows_theory">Broken Windows Theory</a> </p>
-
+<p><a name="fn3">3</a>: Sloan-Howitt, Maryalice, and George
+    L. Kelling. "Subway graffiti in New York City: Gettin' Up
+    vs. Meanin' It and Cleanin' It." Security Journal 1.3 (1990): 131-136.</p>
    <br />
      </div>
   </div>
@@ -351,9 +400,25 @@ streetlight can provide a more nuanced picture. </p>
   <br />
   </div>
  
-
-  
 </div>
 
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=11120743; 
+var sc_invisible=1; 
+var sc_security="3ba4e15c"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="free hit
+counter" href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="//c.statcounter.com/11120743/0/3ba4e15c/1/" alt="free
+hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+  
 </body>
 </html>
